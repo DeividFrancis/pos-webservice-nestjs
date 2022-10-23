@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity('user')
 export class User {
@@ -18,6 +19,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @CreateDateColumn()
@@ -25,4 +27,8 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  constructor(partial: Partial<User>) {
+    Object.assign(this, partial);
+  }
 }

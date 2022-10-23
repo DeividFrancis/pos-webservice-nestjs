@@ -1,4 +1,10 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  Inject,
+  Injectable,
+  NotFoundException,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -24,6 +30,11 @@ export class UserService {
   async findOne(id: number) {
     const user = await this.respository.findOneBy({ id });
     if (!user) throw new NotFoundException('User not found');
+    return user;
+  }
+
+  async findByEmail(email: string) {
+    const user = await this.respository.findOneBy({ email });
     return user;
   }
 

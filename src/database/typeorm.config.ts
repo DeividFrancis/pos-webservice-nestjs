@@ -1,6 +1,5 @@
 import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import 'dotenv/config';
 
 const typeormConfig = new DataSource({
   type: 'mysql',
